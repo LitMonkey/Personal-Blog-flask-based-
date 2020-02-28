@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block jumbotron_text %}
+<h1>{{post.title}}</h1>
+{% endblock %}
+
+{% block blogs %}
+<div class="col-lg-8 col-md-8">
+    {% if post.body_html %}
+    <p>{{post.body_html | safe}}</p>
+    {% else %}
+    <p>{{post.body}}</p>
+    {% endif %}
+</div>
+{% endblock%}
+{% block pagination %}
+{% endblock %}

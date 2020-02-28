@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+{% block title %}Litblog - Login{% endblock %}
+
+{% block content %}
+{{super()}}
+<div class="container">
+    <div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+        <div class="page-header">
+            <h1>Login</h1>
+        </div>
+        <div class="col-md-12">
+            {{ wtf.quick_form(form)}}
+            <h5>New user? <a href="{{url_for('auth.register')}}"> Click here to register</a></h5>
+        </div>
+    </div>
+</div>
+{% endblock%}

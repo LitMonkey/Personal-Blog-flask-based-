@@ -1,0 +1,39 @@
+.navbar{
+    margin-bottom: 0px;
+}
+
+.jumbotron{
+    background: url(../images/pink-flowers-4.jpg);
+    background-size: cover;
+    background-position: 0px -100px;
+    color: rgb(255, 255, 255);
+}
+
+.a-black-pink, .a-black-green{
+    color: black;
+}
+
+.a-black-pink:hover{
+    color: rgb(255, 154, 154);
+}
+
+.a-black-green:hover{
+    color: #116800;
+}
+
+.blog-edit, .blog-show{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.outline{
+    color: #b1b1b1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.post-outline:hover{
+    background-color: rgb(241, 241, 241);
+}

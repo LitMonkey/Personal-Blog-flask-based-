@@ -1,0 +1,69 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+<link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Litblog-Welcome{% endblock %}
+{% block navbar %}
+<div class="navbar navbar-default" style="margin-bottom: 0px;" role = "navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="flase">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LitBlog</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% block nav %}
+            {% block nav_tag %}
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="{{url_for('main.write')}}">Publish</a></li>
+                <li><a href="/">About</a></li>
+            </ul>
+            {% endblock %}
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li><a href="{{url_for('auth.logout')}}">Log Out</a></li>
+                {% else %}
+                <li><a href="{{url_for('auth.login')}}">Log In</a></li>
+                {% endif %}
+            </ul>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container flash-information" style="position: absolute; width: 100%;">
+    {% for message in get_flashed_messages(category_filter = ['warning']) %}
+    <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="allert">&times;</button>
+            {{message}}
+        </div>
+    </div>
+    {% endfor %}
+    {% for message in get_flashed_messages(category_filter = ['success']) %}
+    <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="allert">&times;</button>
+            {{message}}
+        </div>
+    </div>
+    {% endfor%}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/post-format.js')}}"></script>
+{{moment.include_moment()}}
+{% endblock %}

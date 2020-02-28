@@ -1,0 +1,13 @@
+        <div class="col-lg-12 col-md-12">
+            {% if current_user.is_able(Permission.FOLLOW) and user != current_user%}
+                {% if not current_user.is_following(user)%}
+                <a href="{{url_for('main.follow', username=user.username)}}" class="btn btn-primary">Follow</a>
+                {% else %}
+                <a href="{{url_for('main.unfollow', username=user.username)}}" class="btn btn-default">Unfollow</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{url_for('main.followers', username=user.username)}}">Followers:<span class="badge">{{user.follower.count()}}</span></a>
+            {% if current_user.id == user.id %}
+            <button>Edit</button>
+            {% endif %}
+        </div>

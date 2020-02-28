@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block content %}
+{{super()}}
+    {% block jumbotron %}
+    <div class="jumbotron">
+        <div class="container">
+            {% block jumbotron_text %}
+            <h1>Welcome to Litblog!</h1>
+            <h2>Nice to meet you.</h2>
+            {% endblock %}
+        </div>
+    </div>
+    {% endblock %}
+    {% block blogs_body %}
+    <div class="container">
+        <div class="row">
+            {% block blogs %}
+            <div class="col-md-8 col-lg-8 blogs">
+                {% for post in posts %}
+                    <div class="row post-outline">
+                        <a class="tag"></a>
+                        <a class="a-black-pink" href="{{url_for('main.blog_content', username=post.author.username, post_id=post.id)}}">
+                            <h3>{{post.title}}</h3>
+                        </a>
+                        <p class="outline">{{post.body_html}}</p>
+                        <h4 class="publish-info">This post provided by <a class="a-black-pink" href="{{url_for('main.user', username=post.author.username)}}">{{post.author.username}}</a>, <a class="a-black-pink">{{moment(post.timestamp).fromNow(refresh=True)}}</a></h4>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endblock %}
+            {% block sidebar%}
+            <div class="col-md-4 col-lg-4 blog-side-bar">
+                <div class="row calendar">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>Calendar</h4>
+                        <p class="calender-content"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>Recent Blogs</h4>
+                        <p class="recent-blogs"></p>
+                    </div>
+                </div>
+            </div>
+            {% endblock%}
+        </div>
+        {% block pagination %}
+        <div class="row">
+            {{ macros.pagination_widget(pagination, '.index') }}
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+{% endblock %}
